@@ -1,0 +1,18 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <hr>
+
+    <div id="emails-view"></div>
+
+    <div id="compose-view"><h3>New Email</h3></div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
