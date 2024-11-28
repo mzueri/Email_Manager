@@ -10,11 +10,25 @@
         <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
         <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
         <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
-        <hr> <!-- Adds a horizontal line -->        
-        <div>
-            <h3>Email Inbox</h3>
+        <hr> <!-- Adds a horizontal line -->
+        
+        <div id="compose-view">
+            <h3>Compose New Email</h3>
+            <form id="compose-form">
+                <div>
+                    From: <input disabled value="..."> 
+                </div>
+                <div>
+                    To: <input id="compose-recipients">
+                </div>
+                <div>
+                    <input id="compose-subject" placeholder="Subject">
+                </div>
+                <textarea id="compose-body" placeholder="Body"></textarea>
+                <input type="submit"/>
+            </form>
         </div>
-
+        
     </head>
     <body>
         <script>
@@ -47,5 +61,6 @@
             });
 
 
+            
         </script>
 </body>

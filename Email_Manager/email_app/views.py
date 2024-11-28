@@ -8,3 +8,11 @@ def hello(request):
 def index(request):
     return render(request, "mail/inbox.html")
 
+def compose(request):
+    return render(request, "mail/compose.html")
+
+def sent(request):
+    return render(request, "mail/sent.html")
+
+
+
