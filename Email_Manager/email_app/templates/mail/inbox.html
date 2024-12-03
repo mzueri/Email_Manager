@@ -17,6 +17,34 @@
 
     </head>
     <body>
+
+        {% if emails %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sender</th>
+                        <th>Subject</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in emails %}
+                        <tr>
+                            <td>{{ email.sender }}</td>
+                            <td>{{ email.subject }}</td>
+                            <td>{{ email.body }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No emails found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No emails found.</p>
+        {% endif %}
+
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                     // Find the button by its ID
