@@ -14,17 +14,18 @@
         
         <div id="compose-view">
             <h3>Compose New Email</h3>
-            <form id="compose-form">
+            <form id="compose-form" action="/compose/" method="POST">
+                {% csrf_token %}
                 <div>
-                    From: <input disabled value="..."> 
+                    From: <input id="compose-sender" placeholder="Sender" name="sender" required> 
                 </div>
                 <div>
-                    To: <input id="compose-recipients">
+                    To: <input id="compose-recipients" placeholder="Recipient" name="recipient" required>
                 </div>
                 <div>
-                    <input id="compose-subject" placeholder="Subject">
+                    <input id="compose-subject" placeholder="Subject" name="subject" required>
                 </div>
-                <textarea id="compose-body" placeholder="Body"></textarea>
+                <textarea id="compose-body" placeholder="Body" name="body"></textarea>
                 <input type="submit"/>
             </form>
         </div>
@@ -32,26 +33,8 @@
     </head>
     <body>
         <script>
-            const form = document.getElementById("compose-form");
-
-            // Add an event listener for form submission
-            form.addEventListener("submit", function(event) {
-                // Prevent the form from submitting normally (page reload)
-                event.preventDefault();
-
-                // Get the values from the form fields
-                const recipients = document.getElementById("compose-recipients").value;
-                const subject = document.getElementById("compose-subject").value;
-                const body = document.getElementById("compose-body").value;
-
-                // Log the values (You can replace this with other functionality)
-                console.log("Recipients: ", recipients);
-                console.log("Subject: ", subject);
-                console.log("Body: ", body);
-
-                // For example, display the values in an alert (or handle them as needed)
-                alert("Email will be sent to: " + recipients + "\nSubject: " + subject + "\nBody: " + body);
-            });
+            
+                
 
 
 

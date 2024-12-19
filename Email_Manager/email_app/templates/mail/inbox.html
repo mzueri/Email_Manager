@@ -6,13 +6,13 @@
     <head>
         <title>Mail</title>
         <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
-        <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+        <button class="btn btn-sm btn-outline-primary" id="inbox">All Emails</button>
         <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
         <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
         <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
         <hr> <!-- Adds a horizontal line -->        
         <div>
-            <h3>Email Inbox</h3>
+            <h3>All Emails</h3>
         </div>
 
     </head>
@@ -23,6 +23,7 @@
                 <thead>
                     <tr>
                         <th>Sender</th>
+                        <th>Recipient</th>
                         <th>Subject</th>
                         <th>Body</th>
                     </tr>
@@ -31,6 +32,7 @@
                     {% for email in emails %}
                         <tr>
                             <td>{{ email.sender }}</td>
+                            <td>{{ email.recipient }}</td>
                             <td>{{ email.subject }}</td>
                             <td>{{ email.body }}</td>
                         </tr>
@@ -47,9 +49,7 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                    // Find the button by its ID
                     const button = document.getElementById("inbox");
-                    // Add a click event listener to the button
                     button.addEventListener('click', function () {
                         // Redirect to the URL for page2
                         window.location.href = "/";
