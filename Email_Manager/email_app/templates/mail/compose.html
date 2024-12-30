@@ -14,17 +14,18 @@
         
         <div id="compose-view">
             <h3>Compose New Email</h3>
-            <form id="compose-form">
+            <form id="compose-form" action="/compose/" method="POST">
+                {% csrf_token %}
                 <div>
-                    From: <input disabled value="..."> 
+                    From: <input id="compose-sender" placeholder="Sender" name="sender" required> 
                 </div>
                 <div>
-                    To: <input id="compose-recipients">
+                    To: <input id="compose-recipients" placeholder="Recipient" name="recipient" required>
                 </div>
                 <div>
-                    <input id="compose-subject" placeholder="Subject">
+                    <input id="compose-subject" placeholder="Subject" name="subject" required>
                 </div>
-                <textarea id="compose-body" placeholder="Body"></textarea>
+                <textarea id="compose-body" placeholder="Body" name="body"></textarea>
                 <input type="submit"/>
             </form>
         </div>
@@ -32,6 +33,13 @@
     </head>
     <body>
         <script>
+            
+                
+
+
+
+
+
             document.addEventListener('DOMContentLoaded', function () {
                     // Find the button by its ID
                     const button = document.getElementById("inbox");
