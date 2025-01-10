@@ -6,10 +6,14 @@
     <head>
         <title>Mail</title>
         <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
-        <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+        <button class="btn btn-sm btn-outline-primary" id="inbox">All Emails</button>
         <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
         <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
         <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
+        </form>
         <hr> <!-- Adds a horizontal line -->        
         <div>
             <h3>Sent Emails</h3>
