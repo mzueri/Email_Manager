@@ -19,15 +19,13 @@
                 <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
             </form>
             <hr> <!-- Adds a horizontal line --> 
-            <div>
-                <h3>Welcome to the Email Manager, {{ user.username }}!</h3>
-            </div>
+            <h1>Welcome to the Email Manager, {{ user.username }}!</h1>
+            <h2>Inbox</h2>
             {% if emails %}
             <table>
                 <thead>
                     <tr>
                         <th>Sender</th>
-                        <th>Recipient</th>
                         <th>Subject</th>
                         <th>Body</th>
                     </tr>
@@ -36,7 +34,6 @@
                     {% for email in emails %}
                         <tr>
                             <td>{{ email.sender }}</td>
-                            <td>{{ email.recipient }}</td>
                             <td>{{ email.subject }}</td>
                             <td>{{ email.body }}</td>
                         </tr>

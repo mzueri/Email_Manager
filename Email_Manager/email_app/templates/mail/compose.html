@@ -19,9 +19,8 @@
             <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
         </form>
         <hr> <!-- Adds a horizontal line -->
-        
-        <div id="compose-view">
-            <h3>Compose New Email</h3>
+        <h2>Compose New Email</h2>
+        <div>
             <form action="/compose/" method="POST">
                 {% csrf_token %}
                 <div>

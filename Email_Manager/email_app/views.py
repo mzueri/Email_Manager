@@ -38,8 +38,10 @@ def compose(request):
 
 @login_required
 def sent(request):
+    user_email = request.user.email
+    emails = Email.objects.filter(sender=user_email)
     return render(request, "mail/sent.html", {
-        "emails": Email.objects.all()
+        "emails": emails
     })
 
 
