@@ -3,75 +3,77 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Mail</title>
-        <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
-        <button class="btn btn-sm btn-outline-primary" id="inbox">All Emails</button>
+<head>
+    <title>Mail</title>
+    <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
+</head>
+<body>
+    <main>
+        {% if user.is_authenticated %}
+        <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
         <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
         <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
         <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
+        </form>
         <hr> <!-- Adds a horizontal line -->
         
         <div id="compose-view">
             <h3>Compose New Email</h3>
-            <form id="compose-form" action="/compose/" method="POST">
+            <form action="/compose/" method="POST">
                 {% csrf_token %}
                 <div>
-                    From: <input id="compose-sender" value="{{ user_email }}" name="sender" readonly required> 
+                    From: <input value="{{ user_email }}" name="sender" readonly required> 
                 </div>
                 <div>
-                    To: <input id="compose-recipients" placeholder="Recipient" name="recipient" required>
+                    To: <input placeholder="Recipient" name="recipient" required>
                 </div>
                 <div>
-                    <input id="compose-subject" placeholder="Subject" name="subject" required>
+                    <input placeholder="Subject" name="subject" required>
                 </div>
-                <textarea id="compose-body" placeholder="Body" name="body"></textarea>
-                <input type="submit"/>
+                <textarea placeholder="Body" name="body"></textarea>
+                <button type="submit">Submit</button>
             </form>
         </div>
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+            <p> or create a new account</p>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </main>
+    <script>            
+        document.addEventListener('DOMContentLoaded', function () {
+                // Find the button by its ID
+                const button = document.getElementById("inbox");
+                // Add a click event listener to the button
+                button.addEventListener('click', function () {
+                    // Redirect to the URL for page2
+                    window.location.href = "/";
+                });
+            });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find the button by its ID
+            const button = document.getElementById("compose");
+            // Add a click event listener to the button
+            button.addEventListener('click', function () {
+                // Redirect to the URL for page2
+                window.location.href = "/compose";
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find the button by its ID
+            const button = document.getElementById("sent");
+            // Add a click event listener to the button
+            button.addEventListener('click', function () {
+                // Redirect to the URL for page2
+                window.location.href = "/sent";
+            });
+        });
+
+
         
-    </head>
-    <body>
-        <script>
-            
-                
-
-
-
-
-
-            document.addEventListener('DOMContentLoaded', function () {
-                    // Find the button by its ID
-                    const button = document.getElementById("inbox");
-                    // Add a click event listener to the button
-                    button.addEventListener('click', function () {
-                        // Redirect to the URL for page2
-                        window.location.href = "/";
-                    });
-                });
-            document.addEventListener('DOMContentLoaded', function () {
-                // Find the button by its ID
-                const button = document.getElementById("compose");
-                // Add a click event listener to the button
-                button.addEventListener('click', function () {
-                    // Redirect to the URL for page2
-                    window.location.href = "/compose";
-                });
-            });
-            document.addEventListener('DOMContentLoaded', function () {
-                // Find the button by its ID
-                const button = document.getElementById("sent");
-                // Add a click event listener to the button
-                button.addEventListener('click', function () {
-                    // Redirect to the URL for page2
-                    window.location.href = "/sent";
-                });
-            });
-
-
-            
-        </script>
+    </script>
 </body>
