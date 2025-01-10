@@ -20,7 +20,7 @@
             <form id="compose-form" action="/compose/" method="POST">
                 {% csrf_token %}
                 <div>
-                    From: <input id="compose-sender" placeholder="Sender" name="sender" required> 
+                    From: <input id="compose-sender" value="{{ user_email }}" name="sender" readonly required> 
                 </div>
                 <div>
                     To: <input id="compose-recipients" placeholder="Recipient" name="recipient" required>

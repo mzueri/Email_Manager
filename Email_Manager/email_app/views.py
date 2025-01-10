@@ -26,7 +26,9 @@ def compose(request):
         
         return render(request, "mail/inbox.html", {"emails": Email.objects.all()})
         
-    return render(request, "mail/compose.html")
+    return render(request, "mail/compose.html", {
+        'user_email': request.user.email  # Pass the logged-in user's email
+    })
 
 
 def sent(request):
