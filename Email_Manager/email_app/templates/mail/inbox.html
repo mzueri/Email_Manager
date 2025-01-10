@@ -5,59 +5,58 @@
 <html lang="en">
 <head>
     <title>Mail</title>
-    <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
-    <button class="btn btn-sm btn-outline-primary" id="inbox">All Emails</button>
-    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
-    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
-    <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
-    </form>
-    <hr> <!-- Adds a horizontal line -->        
+    <link rel="stylesheet" href="{% static 'mail/styles.css' %}">       
 </head>
 <body>
     <main>
-        <!-- Authentication -->
         {% if user.is_authenticated %}
-        <div>
-            <h3>Welcome to the Email Manager, {{ user.username }}!</h3>
-        </div>
-        {% if emails %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Sender</th>
-                    <th>Recipient</th>
-                    <th>Subject</th>
-                    <th>Body</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for email in emails %}
+            <button class="btn btn-sm btn-outline-primary" id="inbox">All Emails</button>
+            <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+            <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+            <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
+            </form>
+            <hr> <!-- Adds a horizontal line --> 
+            <div>
+                <h3>Welcome to the Email Manager, {{ user.username }}!</h3>
+            </div>
+            {% if emails %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ email.sender }}</td>
-                        <td>{{ email.recipient }}</td>
-                        <td>{{ email.subject }}</td>
-                        <td>{{ email.body }}</td>
+                        <th>Sender</th>
+                        <th>Recipient</th>
+                        <th>Subject</th>
+                        <th>Body</th>
                     </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="3">No emails found.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for email in emails %}
+                        <tr>
+                            <td>{{ email.sender }}</td>
+                            <td>{{ email.recipient }}</td>
+                            <td>{{ email.subject }}</td>
+                            <td>{{ email.body }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">No emails found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>No emails found.</p>
+            {% endif %}
         {% else %}
-            <p>No emails found.</p>
-        {% endif %}
-
-        {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">Log In</a>
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+            <p> or create a new account</p>
+            <a href="{% url 'signup' %}">Sign Up</a>
         {% endif %}
     
-        
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
