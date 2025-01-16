@@ -1,84 +1,31 @@
 
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Mail</title>
-    <link rel="stylesheet" href="{% static 'mail/styles.css' %}">       
-</head>
-<body>
-    <main>
-        {% if user.is_authenticated %}
-            <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
-            <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
-            <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
-            <!--<button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>-->
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button class="btn btn-sm btn-outline-primary" type="submit">Log Out</button>
-            </form>
-            <hr> <!-- Adds a horizontal line --> 
-            <h2>Sent Emails</h2>
-            {% if emails %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Recipient</th>
-                        <th>Subject</th>
-                        <th>Body</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for email in emails %}
-                        <tr>
-                            <td>{{ email.recipient }}</td>
-                            <td>{{ email.subject }}</td>
-                            <td>{{ email.body }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="3">No emails found.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-                <p>No emails found.</p>
-            {% endif %}
-        {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'login' %}">Log In</a>
-            <p> or create a new account</p>
-            <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
-    
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-                const button = document.getElementById("inbox");
-                button.addEventListener('click', function () {
-                    // Redirect to the URL for page2
-                    window.location.href = "/";
-                });
-            });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find the button by its ID
-            const button = document.getElementById("compose");
-            // Add a click event listener to the button
-            button.addEventListener('click', function () {
-                // Redirect to the URL for page2
-                window.location.href = "/compose";
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find the button by its ID
-            const button = document.getElementById("sent");
-            // Add a click event listener to the button
-            button.addEventListener('click', function () {
-                // Redirect to the URL for page2
-                window.location.href = "/sent";
-            });
-        });
-    </script>
-</body>
+{% extends "mail/base.html" %}
+{% block if_authenticated %}
+    <h2>Sent Emails</h2>
+    {% if emails %}
+    <table>
+        <thead>
+            <tr>
+                <th>Recipient</th>
+                <th>Subject</th>
+                <th>Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for email in emails %}
+                <tr>
+                    <td>{{ email.recipient }}</td>
+                    <td>{{ email.subject }}</td>
+                    <td>{{ email.body }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No emails found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No emails found.</p>
+    {% endif %}
+{% endblock %}       
